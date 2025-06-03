@@ -61,6 +61,10 @@ can significantly reduce churn if try to understand their problems and solve!...
 | XGBoost          | 87%   | 98%        |
 
 
+<project_structure.txt>
+<summary><strong>📁 Project Structure</strong></summary>
+
+
 
 
 app link : https://customer-churn-prediction-apk.streamlit.app/
