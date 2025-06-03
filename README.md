@@ -61,52 +61,6 @@ can significantly reduce churn if try to understand their problems and solve!...
 | XGBoost          | 87%   | 98%        |
 
 
-<details>
-<summary><strong>
-├── app/                          # Streamlit application
-│   ├── pages/
-│   │   └── 1_batch_prediction.py
-│   └── app.py                    # Main application file
-│
-├── data/                         # Data storage
-│   ├── train.csv                 # Raw training data
-│   ├── test.csv                  # Raw test data
-│   ├── fe_train.csv              # Feature-engineered training data
-│   ├── fe_test.csv               # Feature-engineered test data
-│   └── test_sample.csv           # Sample of processed data
-│
-├── docs/                         # Documentation
-│   └── project_overview.md       # Project overview documentation
-│
-├── models/                       # Machine learning models
-│   ├── baseline_model.pkl
-│   ├── rf_model.pkl              # Random Forest model
-│   ├── gb_model.pkl              # Gradient Boosting model
-│   └── final_model.pkl           # Final selected model
-│
-├── notebooks/                    # Jupyter notebooks
-│   ├── 01_EDA.ipynb              # Exploratory Data Analysis
-│   ├── 02_baseline_model.ipynb   # Baseline model development
-│   ├── 03_feature_engineering.ipynb  # Feature engineering
-│   ├── 04_model_experiment_evaluation.ipynb  # Model experiments and evaluation
-│   └── 05_final_model.ipynb      # Final model training and evaluation
-│
-├── output/                       # Output files
-│   ├── results_io.py             # Script to save/load results (?)
-│   └── results_.csv              # Results data file
-│
-├── src/                          # Source code
-│   ├── __init__.py               # Init file for src package
-│   ├── feature_engineering.py    # Feature engineering functions
-│   ├── metrics.py                # Evaluation metrics functions
-│   ├── preprocessing.py          # Data preprocessing functions
-│   └── training_model.py         # Model training functions
-│
-├── requirements.txt              # Python dependencies
-└── README.md                     # Project README
-</strong></summary>
-
-
 
 
 app link : https://customer-churn-prediction-apk.streamlit.app/
