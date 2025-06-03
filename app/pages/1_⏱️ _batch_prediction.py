@@ -14,7 +14,7 @@ if st.button('Make Prediction'):
     df = add_total_charges(df)
     df = group_state(df)
     df = drop_multicollinear_features(df)
-    model = pickle.load(open(r'D:\churn prediction\models\final_model.pkl','rb'))
+    model = pickle.load(open('D:\churn prediction\models\final_model.pkl','rb'))
     pred = model.predict(df)
     df['Model prediction'] = pred
     st.write(df['Model prediction'].value_counts())
