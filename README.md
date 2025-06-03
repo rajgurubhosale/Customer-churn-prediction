@@ -54,11 +54,12 @@ can significantly reduce churn if try to understand their problems and solve!...
 ## 🔢 Model Performance
 ## 🤖 Algorithm Comparison
 
-| Algorithm        | Recall   | Precision |
-|------------------|----------|-----------|
-| Baseline(Xgboost)|  0.83%   |  0.75%    |
-| Random Forest    |  0.87%   |  0.98%    |
-| XGBoost          |  0.87%   |  0.98%    |
+| Algorithm        | Recall | Precision |
+|------------------|--------|-----------|
+| Baseline(XGBoost)| 83%   | 75%        |
+| Random Forest    | 87%   | 98%        |
+| XGBoost          | 87%   | 98%        |
+
 
 
 
