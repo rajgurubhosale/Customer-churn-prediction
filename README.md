@@ -63,4 +63,4 @@ can significantly reduce churn if try to understand their problems and solve!...
 
 
 
-app link :https://customer-churn-prediction-6azaz6x4pug7m5v7dv5bke.streamlit.app/
+app link : https://customer-churn-prediction-apk.streamlit.app/
