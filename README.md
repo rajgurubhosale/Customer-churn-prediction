@@ -62,8 +62,7 @@ can significantly reduce churn if try to understand their problems and solve!...
 
 
 <details>
-<summary><strong>Customer-churn-prediction/
-
+<summary><strong>
 ├── app/                          # Streamlit application
 │   ├── pages/
 │   │   └── 1_batch_prediction.py
