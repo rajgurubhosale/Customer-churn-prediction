@@ -60,7 +60,15 @@ can significantly reduce churn if try to understand their problems and solve!...
 | Random Forest    | 87%   | 98%        |
 | XGBoost          | 87%   | 98%        |
 
+## Classification Report
 
+| Class            | Precision | Recall | F1-score | Support |
+| ---------------- | --------- | ------ | -------- | ------- |
+| False            | 0.98      | 1.00   | 0.99     | 572     |
+| True             | 0.99      | 0.87   | 0.93     | 95      |
+| **Accuracy**     |           |        | 0.98     | 667     |
+| **Macro Avg**    | 0.98      | 0.94   | 0.96     | 667     |
+| **Weighted Avg** | 0.98      | 0.98   | 0.98     | 667     |
 
 
 app link : https://customer-churn-prediction-apk.streamlit.app/

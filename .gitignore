@@ -1,0 +1,34 @@
+# Python compiled files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+venv/
+venv_mlflow/
+
+# IDE files
+.idea/
+*.iml
+
+# Distribution / packaging
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Jupyter notebooks checkpoints
+.ipynb_checkpoints/
+
+# Environment files (optional, if using conda or pipenv)
+.env
+.envrc
+
+# Python bytecode from different Python versions
+*.cpython-*.pyc
+
+# Misc
+.DS_Store
+
+__pycache__/
+*.py[cod]

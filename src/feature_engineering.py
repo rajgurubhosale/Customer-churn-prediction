@@ -35,7 +35,7 @@ def group_state(df):
     filt = ~df['State'].isin(states)
     df.loc[filt,'State group churn'] =0
 
-    df.drop(columns='State',inplace=True)
+    df.drop(columns=['State'],inplace=True)
 
     return df
 
