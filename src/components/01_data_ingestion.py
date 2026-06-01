@@ -81,7 +81,7 @@ class DataIngestion:
             
             
             # convert target variable into 0,1
-            df[target_col] = df[target_col].map({"No": 0, "Yes": 1})
+            df[target_col] = df[target_col].astype(int)
             logger.debug("Encoded target column: %s", target_col)
 
           
