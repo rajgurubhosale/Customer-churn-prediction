@@ -13,7 +13,7 @@ def group_state(df):
 
     '''
     states: States ordered in ascending order with high churn customers
-    
+
     '''
     states = ['TX', 'MD', 'NJ', 'MN', 'NV', 'MI', 'NY', 'MS', 'AR', 'ME', 'SC', 'CT',
        'MT', 'WA', 'OH', 'KS', 'NC', 'NH', 'GA', 'UT', 'WY', 'PA', 'MA', 'DE',

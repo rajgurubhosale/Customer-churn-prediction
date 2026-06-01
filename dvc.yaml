@@ -1,0 +1,9 @@
+stages:
+  data_ingestion:
+    cmd: python src/components/01_data_ingestion.py
+    deps:
+      - src/components/01_data_ingestion.py
+      - src/config/config_yaml.yaml
+    outs:
+      - data/raw/raw_train.csv
+      - data/raw/raw_test.csv

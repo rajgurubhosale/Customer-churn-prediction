@@ -4,10 +4,12 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "churn"
-version = "0.1.0"
+version = "0.0.1"
+description = "Churn Prediction ML Project"
+authors = [{name = "Rajguru Bhosale", email = "bhosalerajguru007@gmail.com"}]
 
 [tool.setuptools]
-package-dir = {"" = "src"}
+packages = {find = {}}
 
-[tool.setuptools.packages.find]
-where = ["src"]
+[tool.setuptools.dynamic]
+dependencies = {file = "requirements.txt"}

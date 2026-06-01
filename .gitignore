@@ -23,7 +23,11 @@ build/
 # Environment files (optional, if using conda or pipenv)
 .env
 .envrc
-
+# .gitignore
+__pycache__/
+*.pyc
+*.pyo
+.dvc/cache
 # Python bytecode from different Python versions
 *.cpython-*.pyc
 
@@ -32,3 +36,11 @@ build/
 
 __pycache__/
 *.py[cod]
+project_structure.txt
+mlruns
+/logs
+.vscode
+.idea
+.env
+.vscode
+.devcontainer

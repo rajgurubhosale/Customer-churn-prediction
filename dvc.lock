@@ -1,0 +1,22 @@
+schema: '2.0'
+stages:
+  data_ingestion:
+    cmd: python src/components/01_data_ingestion.py
+    deps:
+    - path: src/components/01_data_ingestion.py
+      hash: md5
+      md5: a58c37ba6788ad003054a4f68cb1366d
+      size: 4155
+    - path: src/config/config_yaml.yaml
+      hash: md5
+      md5: 2bb635ee5a41865fe82ac57c9f819b86
+      size: 248
+    outs:
+    - path: data/raw/raw_test.csv
+      hash: md5
+      md5: 92acb2c6008c005f9edeaa1b0c146975
+      size: 52181
+    - path: data/raw/raw_train.csv
+      hash: md5
+      md5: d13f7d00f32b3e4ced0aba7e3144d17d
+      size: 207388
