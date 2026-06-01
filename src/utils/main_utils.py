@@ -4,6 +4,8 @@ from src.exception import MyException
 import sys 
 import pandas as pd
 from pathlib import Path
+import os
+import joblib
 
 def read_config_file():
     '''read and loads the yaml file from given path
@@ -33,3 +35,21 @@ def save_csv(path: str, df: pd.DataFrame) -> None:
     except Exception as e:
         logger.error("Failed to save CSV: %s", e)
         raise
+    
+
+def save_object(file_path, obj):
+    """
+    Save Python object using joblib.
+    """
+
+    try:
+        
+        os.makedirs(
+            os.path.dirname(file_path),
+            exist_ok=True
+        )
+
+        joblib.dump(obj, file_path)
+
+    except Exception as e:
+        raise e

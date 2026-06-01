@@ -6,24 +6,19 @@ from src.utils.main_utils import read_config_file,save_csv
 import os
 import psycopg
 from dotenv import load_dotenv
-
 # load data
-from dotenv import load_dotenv
-from pathlib import Path
 
-load_dotenv(Path(__file__).resolve().parents[2] / ".env")
 
-import os
-print("HOST:", os.getenv("DB_HOST"))
-print("PASSWORD:", os.getenv("DB_PASSWORD"))
-print("DB:", os.getenv("DB_NAME"))
+load_dotenv()
+#load_dotenv(Path(__file__).resolve().parents[2] / ".env")
+
 class DataIngestion:
     
 
-    def __init__(self):
-        self.config = read_config_file()
-        self.cfg    = self.config['data_ingestion']
-        load_dotenv()
+    def __init__(self,cfg_file):
+        self.cfg_file = cfg_file
+        self.config = self.cfg_file['data_ingestion']
+        self.paths = self.cfg_file['paths']
         
     def get_db_connection(self):
         """Create PostgreSQL connection"""
@@ -44,12 +39,17 @@ class DataIngestion:
         """Load data from PostgreSQL table"""
         try:
             logger.debug("Loading data from table: %s", table_name)
+            allowed_tables = [
+                self.config["train_db_name"],
+                self.config["test_db_name"]
+            ]
 
+            if table_name not in allowed_tables:
+                raise ValueError("Invalid table name")
+            
             with self.get_db_connection() as conn:
-                df = pd.read_sql(
-                    f"SELECT * FROM {table_name}",
-                    conn
-                )
+                query = f"SELECT * FROM {table_name}"
+                df = pd.read_sql_query(query, conn)
 
             logger.info(f"Data loaded :dname: {table_name}— shape: %s", str(df.shape))
             return df
@@ -69,8 +69,8 @@ class DataIngestion:
         '''
         try:
 
-            target_col  = self.cfg['target_col']
-            binary_cols = self.cfg['binary_cols_to_map']
+            target_col  = self.config['target_col']
+            binary_cols = self.config['binary_cols_to_map']
             
 
             for col in binary_cols:
@@ -111,14 +111,14 @@ class DataIngestion:
         try:
             logger.info("Data ingestion started")
 
-            train = self.load_data(self.cfg['train_db_name'])
-            test = self.load_data(self.cfg['test_db_name'])
+            train = self.load_data(self.config['train_db_name'])
+            test = self.load_data(self.config['test_db_name'])
 
             train = self.preprocess_data(train)
             test = self.preprocess_data(test)
 
-            self.save_data(train, self.cfg['raw_train_path'])
-            self.save_data(test, self.cfg['raw_test_path'])
+            self.save_data(train, self.paths['raw_train_path'])
+            self.save_data(test, self.paths['raw_test_path'])
 
             logger.info("Data ingestion completed successfully")
             return train, test
@@ -128,5 +128,6 @@ class DataIngestion:
 
 
 if __name__ == "__main__":
-    ingestion = DataIngestion()
+    cfg_file = read_config_file()
+    ingestion = DataIngestion(cfg_file)
     ingestion.orchestrate()

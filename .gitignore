@@ -10,7 +10,7 @@ venv_mlflow/
 # IDE files
 .idea/
 *.iml
-
+data/
 # Distribution / packaging
 *.egg-info/
 dist/

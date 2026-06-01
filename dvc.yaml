@@ -7,3 +7,18 @@ stages:
     outs:
       - data/raw/raw_train.csv
       - data/raw/raw_test.csv
+      
+  feature_engineering:
+    cmd: python src/components/02_feature_engineering.py
+
+    deps:
+      - src/components/02_feature_engineering.py
+      - data/raw/raw_train.csv
+      - data/raw/raw_test.csv
+
+    outs:
+      - data/interim/X_train.csv
+      - data/interim/X_test.csv
+      - data/interim/y_train.csv
+      - data/interim/y_test.csv
+      - data/dropped_features.pkl
