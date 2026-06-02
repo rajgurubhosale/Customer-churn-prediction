@@ -10,10 +10,12 @@ from src.utils.main_utils import read_config_file, save_object,save_csv
 class FeatureEngineer:
     """Handles feature creation and removal"""
 
-    def __init__(self,config,paths):
-        self.paths = paths
-        self.config = config
-        
+    def __init__(self,cfg):
+        self.cfg = cfg
+        self.config = self.cfg['feature_engineering']
+        self.paths = self.cfg['paths']
+        self.global_  = self.cfg['global']
+
 
     def create_features(self, df: pd.DataFrame) -> pd.DataFrame:
 
@@ -187,7 +189,10 @@ class FeatureEngineer:
 
         logger.info("Feature engineering started")
 
-        target = self.config['target_col']
+        target = self.global_['target_col']
+        
+        train = pd.read_csv(self.paths['raw_train_path'])
+        test = pd.read_csv(self.paths['raw_test_path'])
 
         X_train = train.drop(columns=[target])
         y_train = train[target]
@@ -226,12 +231,8 @@ if __name__ == "__main__":
     logger.info("Starting feature engineering")
 
     cfg = read_config_file()
-    config = cfg['data_transformation']
-    paths = cfg['paths']
-
-    train = pd.read_csv(paths['raw_train_path'])
-    test = pd.read_csv(paths['raw_test_path'])
-
-    fe = FeatureEngineer(config,paths)
-    fe.fe_orchastrate(train, test)
+    
+    
+    fe = FeatureEngineer(cfg)
+    fe.fe_orchastrate()
     

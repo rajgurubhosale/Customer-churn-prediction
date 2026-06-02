@@ -14,6 +14,7 @@ def read_config_file():
         config.yaml: yaml_file from config
     '''
     try:
+        
         yaml_file_path  = 'src/config/config_yaml.yaml'
         with open(yaml_file_path,'r') as f:
             

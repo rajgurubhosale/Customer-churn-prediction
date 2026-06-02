@@ -1,3 +1,6 @@
+global:
+  target_col: Churn
+
 paths:
   raw_train_path: data/raw/raw_train.csv
   raw_test_path: data/raw/raw_test.csv
@@ -10,16 +13,21 @@ paths:
 
   dropped_features_path: data/dropped_features.pkl
 
+  preprocessor_path: artifacts/preprocessor.pkl
+
+  model_pipeline_path: artifacts/model/model_pipeline.pkl
+
 
 data_ingestion:
   train_db_name: churn_train
   test_db_name: churn_test
-  target_col: Churn
   binary_cols_to_map:
     - International plan
     - Voice mail plan
  
-data_transformation:
-
-  target_col: "Churn"
+feature_engineering:
   corr_threshold: 0.70
+
+
+
+  

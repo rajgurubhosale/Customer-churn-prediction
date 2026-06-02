@@ -17,8 +17,10 @@ class DataIngestion:
 
     def __init__(self,cfg_file):
         self.cfg_file = cfg_file
+        
         self.config = self.cfg_file['data_ingestion']
         self.paths = self.cfg_file['paths']
+        self.global_ = self.cfg_file['global']
         
     def get_db_connection(self):
         """Create PostgreSQL connection"""
@@ -69,7 +71,7 @@ class DataIngestion:
         '''
         try:
 
-            target_col  = self.config['target_col']
+            target_col  = self.global_['target_col']
             binary_cols = self.config['binary_cols_to_map']
             
 
