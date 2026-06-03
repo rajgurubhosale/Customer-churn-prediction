@@ -13,24 +13,18 @@ class DataTransformation:
     def __init__(self, ):
         pass
 
-    def build(self, num_cols, cat_cols):
+    def build(self, num_cols):
         try:
             num_pipe = Pipeline([
                 ('impute', SimpleImputer(strategy='mean')),
                 ('scaler', RobustScaler())
             ])
 
-            cat_pipe = Pipeline([
-                ('impute', SimpleImputer(strategy='most_frequent')),
-                ('ohe', OneHotEncoder(handle_unknown='ignore', sparse_output=False))
-            ])
-
             transformer = ColumnTransformer([
                 ('num', num_pipe, num_cols),
-                ('cat', cat_pipe, cat_cols)
             ], remainder='drop')
 
-            logger.info("pipeline built num:%d cat:%d", len(num_cols), len(cat_cols))
+            logger.info("pipeline built num:%d ", len(num_cols))
             return transformer
 
         except Exception as e:

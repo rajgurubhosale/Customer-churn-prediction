@@ -35,32 +35,49 @@ class ModelTrainer:
     def run(self):
         try:
             logger.info("model training started")
-            setup_mlflow()  
+            setup_mlflow()
 
             X_train = pd.read_csv(self.paths['interim_train_path'])
             y_train = pd.read_csv(self.paths['interim_y_train_path'])
 
             num_cols = X_train.select_dtypes(include=['int64', 'float64']).columns.tolist()
-            cat_cols = X_train.select_dtypes(include=['object']).columns.tolist()
+
+            logger.info("num_cols: %s", num_cols)
 
             transformer = DataTransformation()
-            tnf_pipeline = transformer.build(num_cols, cat_cols)
-            
+            tnf_pipeline = transformer.build(num_cols )
             final_model = self.load_model()
-
             final_pipeline = self.train_model_pipeline(final_model, tnf_pipeline, X_train, y_train)
 
             mlflow.set_experiment(self.mlflow_config['experiment_name'])
 
             with mlflow.start_run() as run:
+                # log params
                 mlflow.log_params(self.params)
+
+                # log model — only once
                 mlflow.sklearn.log_model(
                     sk_model=final_pipeline,
                     artifact_path="model",
                     registered_model_name=self.mlflow_config['model_name']
                 )
+
+                # set staging alias
+                client = mlflow.tracking.MlflowClient()
+                latest_version = client.get_latest_versions(
+                    self.mlflow_config['model_name']
+                )[0].version
+
+                client.set_registered_model_alias(
+                    name=self.mlflow_config['model_name'],
+                    alias="staging",
+                    version=latest_version
+                )
+
+                logger.info("model version %s set to staging", latest_version)
                 logger.info("mlflow run id: %s", run.info.run_id)
 
+            # save locally
             save_object(self.paths['model_pipeline_path'], final_pipeline)
             logger.info("model saved at: %s", self.paths['model_pipeline_path'])
 
@@ -68,7 +85,7 @@ class ModelTrainer:
 
         except Exception as e:
             raise MyException(e, sys)
-        
+
 
 if __name__ == '__main__':
     trainer = ModelTrainer()

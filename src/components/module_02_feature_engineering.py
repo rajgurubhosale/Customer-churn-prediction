@@ -202,7 +202,14 @@ class FeatureEngineer:
 
         X_train = self.create_features(X_train)
         X_test = self.create_features(X_test)
+        
+        # drop the feature State:
+        #due to high cardiniliaty
+        X_train = X_train.drop(columns='State')
+        
+        X_test = X_test.drop(columns='State')
 
+        
         X_train, dropped_feature_list = self.remove_multicollinear_feature(
             X_train,
             y_train,
