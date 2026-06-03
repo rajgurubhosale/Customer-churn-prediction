@@ -1,16 +1,16 @@
 schema: '2.0'
 stages:
   data_ingestion:
-    cmd: python src/components/01_data_ingestion.py
+    cmd: python src/components/module_01_data_ingestion.py
     deps:
-    - path: src/components/01_data_ingestion.py
+    - path: src/components/module_01_data_ingestion.py
       hash: md5
-      md5: cfc121b1fd5f2edba3bbf853508337d6
-      size: 4288
+      md5: ea3060cbee9ee8691941372f2903a2cd
+      size: 4347
     - path: src/config/config_yaml.yaml
       hash: md5
-      md5: bb961870b9893b00c2091bad85025271
-      size: 594
+      md5: 8ede5feb3f685c5d36473aa4f3b60073
+      size: 1031
     outs:
     - path: data/raw/raw_test.csv
       hash: md5
@@ -21,7 +21,7 @@ stages:
       md5: 73197f3c6e5eb23b868304e4c2b572f2
       size: 210054
   feature_engineering:
-    cmd: python src/components/02_feature_engineering.py
+    cmd: python src/components/module_02_feature_engineering.py
     deps:
     - path: data/raw/raw_test.csv
       hash: md5
@@ -31,14 +31,14 @@ stages:
       hash: md5
       md5: 73197f3c6e5eb23b868304e4c2b572f2
       size: 210054
-    - path: src/components/02_feature_engineering.py
+    - path: src/components/module_02_feature_engineering.py
       hash: md5
-      md5: ef1f45bef41cb72d4d89aa9574d26440
-      size: 7361
+      md5: 7c94e7e64c27afb428a8da0ff866241a
+      size: 7387
     outs:
     - path: data/dropped_features.pkl
       hash: md5
-      md5: 4d8588a003488502e5302d8991dc9494
+      md5: 20c386bdc5b445bc2d08f39ca0d52431
       size: 248
     - path: data/interim/X_test.csv
       hash: md5
@@ -56,3 +56,43 @@ stages:
       hash: md5
       md5: 5848d6ce5e5cc429c5760e09da64faaa
       size: 8005
+  model_training:
+    cmd: python src/components/module_04_training_model.py
+    deps:
+    - path: data/interim/X_train.csv
+      hash: md5
+      md5: cd88e86976202ce3227e61ea3a86cc83
+      size: 150865
+    - path: data/interim/y_train.csv
+      hash: md5
+      md5: 5848d6ce5e5cc429c5760e09da64faaa
+      size: 8005
+    - path: src/components/module_03_data_transformation.py
+      hash: md5
+      md5: 4f6c0cd01a8d65489465775f7793905d
+      size: 1140
+    - path: src/components/module_04_training_model.py
+      hash: md5
+      md5: 6896d1cbef47ec5b83b271e0d6b8b828
+      size: 2660
+    - path: src/config/config_yaml.yaml
+      hash: md5
+      md5: 8ede5feb3f685c5d36473aa4f3b60073
+      size: 1031
+    params:
+      src/config/config_yaml.yaml:
+        model_training.params:
+          max_depth: 5
+          learning_rate: 0.010186656321288096
+          n_estimators: 574
+          subsample: 0.6434239171890623
+          colsample_bytree: 0.7317375561686101
+          reg_alpha: 6.92738333659976
+          scale_pos_weight: 5.966855473903635
+          random_state: 42
+          eval_metric: logloss
+    outs:
+    - path: data/model/model_pipeline.pkl
+      hash: md5
+      md5: 774c97450957f154106e378d07828a0c
+      size: 1069521

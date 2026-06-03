@@ -13,9 +13,8 @@ paths:
 
   dropped_features_path: data/dropped_features.pkl
 
-  preprocessor_path: artifacts/preprocessor.pkl
 
-  model_pipeline_path: artifacts/model/model_pipeline.pkl
+  model_pipeline_path: data/model/model_pipeline.pkl
 
 
 data_ingestion:
@@ -28,6 +27,18 @@ data_ingestion:
 feature_engineering:
   corr_threshold: 0.70
 
-
-
   
+model_training:
+  params:
+    max_depth: 5
+    learning_rate: 0.010186656321288096
+    n_estimators: 574
+    subsample: 0.6434239171890623
+    colsample_bytree: 0.7317375561686101
+    reg_alpha: 6.92738333659976
+    scale_pos_weight: 5.966855473903635
+    random_state: 42
+    eval_metric: logloss
+  mlflow:
+    experiment_name: "ml_project"
+    model_name: "xgb_classifier"

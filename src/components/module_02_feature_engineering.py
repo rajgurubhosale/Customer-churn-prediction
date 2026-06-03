@@ -185,7 +185,7 @@ class FeatureEngineer:
             raise MyException(e, sys)
             
         
-    def fe_orchastrate(self, train, test):
+    def fe_orchastrate(self,):
 
         logger.info("Feature engineering started")
 
