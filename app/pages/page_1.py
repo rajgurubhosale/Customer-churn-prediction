@@ -3,8 +3,31 @@ import pandas as pd
 import mlflow.sklearn
 import shap
 import matplotlib.pyplot as plt
-from src.utils.mlflow_utils import setup_mlflow
+import os
+from dotenv import load_dotenv
+import dagshub
 
+def setup_mlflow():
+    load_dotenv()
+    
+
+    DAGSHUB_REPO_OWNER = os.getenv("DAGSHUB_REPO_OWNER")
+    DAGSHUB_REPO_NAME = os.getenv("DAGSHUB_REPO_NAME")
+    DAGSHUB_USER_TOKEN = os.getenv("DAGSHUB_USER_TOKEN")
+
+    os.environ["MLFLOW_TRACKING_USERNAME"] = DAGSHUB_REPO_OWNER
+    os.environ["MLFLOW_TRACKING_PASSWORD"] = DAGSHUB_USER_TOKEN
+
+    dagshub.init(
+        repo_owner=DAGSHUB_REPO_OWNER,
+        repo_name=DAGSHUB_REPO_NAME,
+        mlflow=True
+    )
+    
+    mlflow.set_tracking_uri(os.getenv("DAGUSHUB_TRACKING_URI"))
+
+    print("MLflow connected successfully")
+    
 # load model once
 @st.cache_resource
 def load_model():
