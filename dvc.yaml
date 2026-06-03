@@ -35,3 +35,12 @@ stages:
     params:
       - src/config/config_yaml.yaml:
           - model_training.params
+
+  model_evaluation:
+    cmd: python src/components/module_05_model_evalution.py
+    deps:
+      - src/components/module_05_model_evalution.py
+      - src/components/module_04_training_model.py
+      - src/config/config_yaml.yaml
+      - data/interim/X_test.csv
+      - data/interim/y_test.csv

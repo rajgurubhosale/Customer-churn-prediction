@@ -96,3 +96,26 @@ stages:
       hash: md5
       md5: 70c77e9ca0f988b1d301956f8c768446
       size: 1047729
+  model_evaluation:
+    cmd: python src/components/module_05_model_evalution.py
+    deps:
+    - path: data/interim/X_test.csv
+      hash: md5
+      md5: 79a924e5ee16f4c776f836c7c9f51a34
+      size: 35944
+    - path: data/interim/y_test.csv
+      hash: md5
+      md5: 1b8b2ad74744cd665371a5f63660172d
+      size: 2008
+    - path: src/components/module_04_training_model.py
+      hash: md5
+      md5: 7b0f623ad54d816300e09aee087a424c
+      size: 3237
+    - path: src/components/module_05_model_evalution.py
+      hash: md5
+      md5: b8e02cb2dc4598451fdc69aa10bd2955
+      size: 3232
+    - path: src/config/config_yaml.yaml
+      hash: md5
+      md5: 8ede5feb3f685c5d36473aa4f3b60073
+      size: 1031
